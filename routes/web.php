@@ -11,31 +11,29 @@ Router::setDefaultNamespace('\Demo\Controllers');
 Router::get('/home', function () {
     return 'Hello home';
 });
-Router::get('/', function () {
-    return 'Hello world';
+
+Router::group(['exceptionHandler' => \Demo\Handlers\CustomExceptionHandler::class], function () {
+
+	Router::get('/', 'DefaultController@home')->setName('home');
+
+	Router::get('/contact', 'DefaultController@contact')->setName('contact');
+
+	Router::basic('/companies/{id?}', 'DefaultController@companies')->setName('companies');
+
+    // API
+
+	Router::group(['prefix' => '/api', 'middleware' => \Demo\Middlewares\ApiVerification::class], function () {
+		Router::resource('/demo', 'ApiController');
+	});
+
+    // CALLBACK EXAMPLES
+
+    Router::get('/foo', function() {
+        return 'foo';
+    });
+
+    Router::get('/foo-bar', function() {
+        return 'foo-bar';
+    });
+
 });
-// Router::group(['exceptionHandler' => \Demo\Handlers\CustomExceptionHandler::class], function () {
-
-// 	Router::get('/', 'DefaultController@home')->setName('home');
-
-// 	Router::get('/contact', 'DefaultController@contact')->setName('contact');
-
-// 	Router::basic('/companies/{id?}', 'DefaultController@companies')->setName('companies');
-
-//     // API
-
-// 	Router::group(['prefix' => '/api', 'middleware' => \Demo\Middlewares\ApiVerification::class], function () {
-// 		Router::resource('/demo', 'ApiController');
-// 	});
-
-//     // CALLBACK EXAMPLES
-
-//     Router::get('/foo', function() {
-//         return 'foo';
-//     });
-
-//     Router::get('/foo-bar', function() {
-//         return 'foo-bar';
-//     });
-
-// });
