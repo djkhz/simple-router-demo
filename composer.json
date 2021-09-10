@@ -9,11 +9,8 @@
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"php": ">=7.1",
-		"pecee/simple-router": "^4.0"
-	},
-	"require-dev": {
-
+		"php": ">=7.3",
+		"pecee/simple-router": "4.3.7.2"
 	},
 	"config": {
 		"preferred-install": "dist"
