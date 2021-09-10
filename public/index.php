@@ -1,5 +1,5 @@
 <?php
-
+use Demo\Router;
 // load composer dependencies
 require '../vendor/autoload.php';
 
