@@ -1,4 +1,7 @@
 RewriteEngine On
-RewriteRule ^public/ - [L]
-RewriteCond public/$0 -F
-RewriteRule .* public/$0 [L]
+RewriteBase /
+
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+RewriteRule ^ %1 [L,NE,R=302]
+
+RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
